@@ -1,0 +1,22 @@
+# Server Configuration
+server:
+    port: 8080
+    
+spring:
+ data: 
+  rest:
+   defaultMediaType: application/json
+  mongodb:
+   uri: ${MONGO_DB_URI}
+   database: ${MONGO_DB_NAME}
+   
+   
+
+ 
+ management:
+  endpoints:
+   web:
+    cors:
+     allowed-origins: '*'
+
+  
