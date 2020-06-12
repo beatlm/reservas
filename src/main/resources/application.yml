@@ -9,14 +9,7 @@ spring:
   mongodb:
    uri: ${MONGO_DB_URI}
    database: ${MONGO_DB_NAME}
-   
-   
-
  
- management:
-  endpoints:
-   web:
-    cors:
-     allowed-origins: '*'
 
-  
+jwt:
+  secret: ${SECRET}

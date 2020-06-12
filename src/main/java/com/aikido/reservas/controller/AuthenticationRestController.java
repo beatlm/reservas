@@ -5,12 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aikido.reservas.entity.Usuario;
+import com.aikido.reservas.model.AuthenticateUser;
 import com.aikido.reservas.model.TokenData;
 import com.aikido.reservas.repository.UsuarioRepository;
 import com.aikido.reservas.utils.Encryptor;
@@ -19,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
+@RequestMapping("reservas")
 @CrossOrigin(origins = { "http://localhost:4200","http://localhost:8080", "https://aikido-grados.herokuapp.com" }, methods = {
 		RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST, RequestMethod.PATCH })
 public class AuthenticationRestController {
@@ -28,8 +31,8 @@ public class AuthenticationRestController {
 	@Autowired
 	private Encryptor encryptor;
 
-	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-	public ResponseEntity<TokenData> authenticate(@RequestBody Usuario user) {
+	@PostMapping(value = "/authenticate")
+	public ResponseEntity<TokenData> authenticate(@RequestBody AuthenticateUser user) {
 		log.info("Autenticamos usuario:{} con pasword {} ", user.getEmail(), user.getPassword());
 		Usuario foundUser = authenticationRepository.findByEmail(user.getEmail());
 		if (foundUser!=null){
@@ -49,7 +52,7 @@ public class AuthenticationRestController {
 
 	}
 
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@PostMapping(value = "/register")
 	public ResponseEntity<Usuario> register(@RequestBody Usuario user) {
 		Usuario newUser = new Usuario();
 		newUser.setNombre(user.getNombre());
