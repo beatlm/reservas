@@ -7,17 +7,17 @@ import java.util.List;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.aikido.reservas.entity.Reserva;
+import com.aikido.reservas.entity.Clase;
 
 
-public interface ReservaRepository extends CrudRepository<Reserva,String> {
+public interface ClaseRepository extends CrudRepository<Clase,String> {
 	
-	public List<Reserva> findByProfesor(String profesor);
+	public List<Clase> findByProfesor(String profesor);
 	@Query("select b from Book b " +
             "where b.from between ?1 and ?2 and b.to between ?1 and ?2")
-	public List<Reserva> findByDiasBetween(LocalDate from, LocalDate to);
+	public List<Clase> findByDiasBetween(LocalDate from, LocalDate to);
 	
 
-	public List<Reserva> findAll();
+	public List<Clase> findAll();
 
 }

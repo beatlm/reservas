@@ -16,7 +16,7 @@ public class Usuario {
 	
 	private String apellido;
 	
-	private List<Reserva> reservas;
+	private List<Clase> reservas;
 	
 
 }
