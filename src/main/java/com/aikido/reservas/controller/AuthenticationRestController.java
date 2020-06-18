@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping("reservas")
-@CrossOrigin(origins = { "http://localhost:4200","http://localhost:8080", "https://aikido-grados.herokuapp.com" }, methods = {
+@CrossOrigin(origins = { "http://localhost:4200","http://localhost:8080", "https://reservas-aikido.herokuapp.com" }, methods = {
 		RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST, RequestMethod.PATCH })
 public class AuthenticationRestController {
 	@Autowired
