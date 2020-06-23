@@ -6,9 +6,12 @@ import lombok.Data;
 @Data
 public class TokenData {
 	@Id
-	private String id;
+	private String email;
 
-	private String name;
+	private String nombre;
+	
+	private String apellido;
+	
 	private String token;
 	
 }

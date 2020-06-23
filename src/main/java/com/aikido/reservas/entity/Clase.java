@@ -9,8 +9,8 @@ import lombok.Data;
 @Data
 public class Clase {
 	@Id
-	 
-	private int id;
+	private String id;
+	
 	private String profesor;
 
 	private LocalDate dia;

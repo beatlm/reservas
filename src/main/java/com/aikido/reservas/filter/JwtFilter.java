@@ -19,8 +19,9 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.impl.TextCodec;
-
-@WebFilter(urlPatterns = "/api/*")
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
+@WebFilter(urlPatterns = "*")
 public class JwtFilter implements Filter {
  
   @Value("${jwt.secret}")
@@ -36,7 +37,7 @@ public class JwtFilter implements Filter {
     final HttpServletRequest request = (HttpServletRequest) req;
     final HttpServletResponse response = (HttpServletResponse) res;
     final String authHeader = request.getHeader("authorization");
- 
+ log.info("Entramos en el filtro jwt");
     if (HttpMethod.OPTIONS.toString().equals(request.getMethod())) {
       response.setStatus(HttpServletResponse.SC_OK);
       chain.doFilter(req, res);
@@ -48,7 +49,7 @@ public class JwtFilter implements Filter {
       }
  
       final String token = authHeader.substring(7);
- 
+ log.info("Token {} ",token);
       try {
         final Claims claims = Jwts.parser()
             .setSigningKey(TextCodec.BASE64.encode(secret))

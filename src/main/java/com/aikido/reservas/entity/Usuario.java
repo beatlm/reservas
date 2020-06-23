@@ -1,5 +1,6 @@
 package com.aikido.reservas.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -16,7 +17,7 @@ public class Usuario {
 	
 	private String apellido;
 	
-	private List<Clase> reservas;
+	private ArrayList<Clase> reservas;
 	
 
 }

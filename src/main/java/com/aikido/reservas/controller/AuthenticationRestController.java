@@ -1,6 +1,10 @@
 
 package com.aikido.reservas.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,8 +43,8 @@ public class AuthenticationRestController {
 			log.info("Found: " + foundUser.getEmail());
 			if(encryptor.decrypt(foundUser.getPassword()).equals(user.getPassword())){
 				TokenData tokenData = new TokenData();
-				tokenData.setId(foundUser.getEmail());
-				tokenData.setName(foundUser.getNombre());
+				BeanUtils.copyProperties(foundUser,tokenData);
+		
 				tokenData.setToken("Token");
 				return new ResponseEntity<>(tokenData, HttpStatus.OK);
 			}else {
@@ -55,10 +59,10 @@ public class AuthenticationRestController {
 	@PostMapping(value = "/register")
 	public ResponseEntity<Usuario> register(@RequestBody Usuario user) {
 		Usuario newUser = new Usuario();
-		newUser.setNombre(user.getNombre());
+		BeanUtils.copyProperties(user, newUser);
 		newUser.setPassword(encryptor.encrypt(user.getPassword()));
-		newUser.setEmail(user.getEmail());
-		newUser.setApellido(user.getApellido());
+		newUser.setReservas(new ArrayList<>());//Inicializamos el array de reservas para que no sea nulos
+
 		log.info("Guardamos el usuario '{}' con password '{}'", newUser.getEmail(), newUser.getPassword());
 		authenticationRepository.save(newUser);
 
